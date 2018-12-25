@@ -11,20 +11,16 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 
-import static com.gridgain.benchmark.VolatileVariableBenchmark.THREADS;
-
-@Threads(THREADS)
+@Threads(8)
 @Fork(1)
 public class VolatileVariableBenchmark {
-    static final int THREADS = 8;
-
     @State(Scope.Benchmark)
     public static class BenchmarkState {
         volatile int value;
     }
 
     @Benchmark @BenchmarkMode(Mode.Throughput) @OutputTimeUnit(TimeUnit.SECONDS)
-    public int benchmarkReadWriteBenchmark(BenchmarkState state) {
+    public int testVolatileReadWrite(BenchmarkState state) {
         state.value = ThreadLocalRandom.current().nextInt();
 
         return state.value;

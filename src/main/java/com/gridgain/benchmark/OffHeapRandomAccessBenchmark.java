@@ -34,7 +34,7 @@ public class OffHeapRandomAccessBenchmark {
     }
 
     @Benchmark @BenchmarkMode(Mode.Throughput) @OutputTimeUnit(TimeUnit.SECONDS)
-    public void testOffheapRandomAccess(BenchmarkState state) {
+    public void testOffHeapRandomAccess(BenchmarkState state) {
         long k = ThreadLocalRandom.current().nextLong(SIZE);
 
         int v = state.array.get(k);

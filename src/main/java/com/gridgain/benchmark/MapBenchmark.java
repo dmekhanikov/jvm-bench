@@ -17,12 +17,9 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 
-import static com.gridgain.benchmark.MapBenchmark.THREADS;
-
-@Threads(THREADS)
+@Threads(8)
 @Fork(1)
 public class MapBenchmark {
-    static final int THREADS = 8;
     private static final int BOUND = 1000;
 
     @State(Scope.Benchmark)
@@ -38,7 +35,7 @@ public class MapBenchmark {
     }
 
     @Benchmark @BenchmarkMode(Mode.Throughput) @OutputTimeUnit(TimeUnit.SECONDS)
-    public int testRandomNumbersConcurrentHashMapCounter(MapBenchmarkState state) {
+    public int testRandomNumbersCounter(MapBenchmarkState state) {
         int x = ThreadLocalRandom.current().nextInt(BOUND);
 
         state.map.compute(x, (k, v) ->
